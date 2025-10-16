@@ -1,26 +1,37 @@
 [
   {
     "category_id": 1,
-    "name": "Food"
+    "name": "Food",
+    "parent_id": null
   },
   {
     "category_id": 2,
-    "name": "Hygiene"
+    "name": "Hygiene",
+    "parent_id": null
   },
   {
     "category_id": 3,
-    "name": "Personal"
+    "name": "Personal",
+    "parent_id": null
   },
   {
     "category_id": 4,
-    "name": "Pets"
+    "name": "Pets",
+    "parent_id": null
   },
   {
     "category_id": 5,
-    "name": "Beverages"
+    "name": "Beverages",
+    "parent_id": null
   },
   {
     "category_id": 6,
-    "name": "Garden"
+    "name": "Garden",
+    "parent_id": null
+  },
+  {
+    "category_id": 7,
+    "name": "Homeware",
+    "parent_id": null
   }
 ]

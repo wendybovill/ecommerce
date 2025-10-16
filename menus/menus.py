@@ -5,6 +5,7 @@ from env import DATA_DIR, DEFAULT_CUSTOMER_PATH, DEFAULT_ORDER_PATH, DEFAULT_PRO
 from menus.menu_category import category_menu
 from menus.menu_product import product_menu
 from menus.menu_orders import orders_menu
+from menus.menu_customers import customer_menu
 
 PRODUCTS_PATH: Path = DEFAULT_PRODUCT_PATH        # data_files/product_catalog.json
 CATEGORIES_PATH: Path = DEFAULT_CATEGORIES_PATH    # data_files/category_catalog.json
@@ -54,130 +55,130 @@ def main_menu():
 
 #========= Customer Section =========
 # Add a new Customer
-def add_customer():
-    """
-    This is the function to add a new customer
-    """
-    customer = {
-        "fname" : input("Enter Customer First Name: "),
-        "lname" : input("Enter Customer Last Name: "),
-        "email" : input("Enter Customer Email Address: "),
-        "address" : {
-            "line_1" : input("Enter Address Line 1: "),
-            "line_2" : input("Enter Address Line 2: "),
-            "town_or_city" : input("Enter Town/City: "),
-            "county" : input("Enter County: "),
-            "post_code" : input("Enter Post Code: "),
-            "country" : input("Enter Country"),
-        }
-    }
-    print("\nIs Delivery Address the same as Address?\n")
-    delivery_choice = input("Select:\n1 For Yes\n2 To Enter Delivery Address")
+# def add_customer():
+#     """
+#     This is the function to add a new customer
+#     """
+#     customer = {
+#         "fname" : input("Enter Customer First Name: "),
+#         "lname" : input("Enter Customer Last Name: "),
+#         "email" : input("Enter Customer Email Address: "),
+#         "address" : {
+#             "line_1" : input("Enter Address Line 1: "),
+#             "line_2" : input("Enter Address Line 2: "),
+#             "town_or_city" : input("Enter Town/City: "),
+#             "county" : input("Enter County: "),
+#             "post_code" : input("Enter Post Code: "),
+#             "country" : input("Enter Country"),
+#         }
+#     }
+#     print("\nIs Delivery Address the same as Address?\n")
+#     delivery_choice = input("Select:\n1 For Yes\n2 To Enter Delivery Address")
 
-    if delivery_choice == "1":
-        with open(CUSTOMERS_PATH, "a") as file:
-            # file.write(customer + "\n")
-            json.dumps(customer + "\n")
-        with open(DEFAULT_REPORTS_PATH, "w") as file:
-            file.write("customer")
-            # json.dumps(customer + "\n")
-        print("Customer added successfully!")
-        print("Returning to Customer Menu.")
-        customer_menu()
-    elif delivery_choice == "2":
-        print("Enter Delivery Address")
-        def add_customer_delivery_address():
-            customer.delivery_address = {
-                "line_1" : input("Enter Address Line 1: "),
-                "line_2" : input("Enter Address Line 2: "),
-                "town_or_city" : input("Enter Town/City: "),
-                "county" : input("Enter County: "),
-                "post_code" : input("Enter Post Code: "),
-                "country" : input("Enter Country"),
-                }
-        add_customer_delivery_address()
-        with open(DEFAULT_CUSTOMER_PATH, "a+") as file:
-            json.dumps(customer + "\n")
-        with open(records_file, "a") as file:
-            # file.write(customer + "\n")
-            json.dumps(customer + "\n")
-        print("Customer added successfully!")
-        print("Returning to Customer Menu.")
-        customer_menu()
-    else:
-        print("Invalid choice. Please enter a number between 1 and 2.")
-
-
-# View Customers
-def view_customers():
-    """
-    This is the function to view all customers
-    """
-    try:
-        with open(DEFAULT_CUSTOMER_PATH, "r") as file:
-            customers = file.read()
-            if customers:
-                print("\n--- Viewing Customers ---")
-                print(customers)
-            else:
-                print("\nNo customers found.")
-    except FileNotFoundError:
-        print("No customers found.")
+#     if delivery_choice == "1":
+#         with open(CUSTOMERS_PATH, "a") as file:
+#             # file.write(customer + "\n")
+#             json.dumps(customer + "\n")
+#         with open(DEFAULT_REPORTS_PATH, "w") as file:
+#             file.write("customer")
+#             # json.dumps(customer + "\n")
+#         print("Customer added successfully!")
+#         print("Returning to Customer Menu.")
+#         customer_menu()
+#     elif delivery_choice == "2":
+#         print("Enter Delivery Address")
+#         def add_customer_delivery_address():
+#             customer.delivery_address = {
+#                 "line_1" : input("Enter Address Line 1: "),
+#                 "line_2" : input("Enter Address Line 2: "),
+#                 "town_or_city" : input("Enter Town/City: "),
+#                 "county" : input("Enter County: "),
+#                 "post_code" : input("Enter Post Code: "),
+#                 "country" : input("Enter Country"),
+#                 }
+#         add_customer_delivery_address()
+#         with open(DEFAULT_CUSTOMER_PATH, "a+") as file:
+#             json.dumps(customer + "\n")
+#         with open(records_file, "a") as file:
+#             # file.write(customer + "\n")
+#             json.dumps(customer + "\n")
+#         print("Customer added successfully!")
+#         print("Returning to Customer Menu.")
+#         customer_menu()
+#     else:
+#         print("Invalid choice. Please enter a number between 1 and 2.")
 
 
-# Delete all customers
-def delete_all_customers():
-    """
-    This is the function to view all customers
-    """
-    confirm = input("Are you sure you want to delete all customers? (Yes/No): ")
-    if confirm.lower() == "yes":
-        with open(customers_file, "w") as file:
-            pass
-        print("All customers have been deleted")
-    else:
-        print("Deletion cancelled")
-        print("Returning to Customer Menu.")
-        customer_menu()
+# # View Customers
+# def view_customers():
+#     """
+#     This is the function to view all customers
+#     """
+#     try:
+#         with open(DEFAULT_CUSTOMER_PATH, "r") as file:
+#             customers = file.read()
+#             if customers:
+#                 print("\n--- Viewing Customers ---")
+#                 print(customers)
+#             else:
+#                 print("\nNo customers found.")
+#     except FileNotFoundError:
+#         print("No customers found.")
 
 
-# ==== MAIN CUSTOMER MENU 
-def customer_menu():
-    """
-    This is the function to display the Product Menu
-    and to call relevant CUSTOMER functions
-    """
-    print("""\n    
-+ ==== Customer Menu ==== +
-|                         |
-| 1. Add a new Customer   |
-| 2. View all Customers   |
-| 3. Edit Customer        |
-| 4. Delete a Customer    |
-| 5. Delete all Customers |
-| 6. Return to Main Menu  |
-|                         |
-+ ----------------------- +\n
-""")
+# # Delete all customers
+# def delete_all_customers():
+#     """
+#     This is the function to view all customers
+#     """
+#     confirm = input("Are you sure you want to delete all customers? (Yes/No): ")
+#     if confirm.lower() == "yes":
+#         with open(customers_file, "w") as file:
+#             pass
+#         print("All customers have been deleted")
+#     else:
+#         print("Deletion cancelled")
+#         print("Returning to Customer Menu.")
+#         customer_menu()
 
-    customer_choice = input(">> Please select option (1-6): ")
 
-    if customer_choice == "1":
-        add_customer()
-    elif customer_choice == "2":
-        view_customers()
-    elif customer_choice == "3":
-        edit_customer()
-    elif customer_choice == "4":
-        delete_customer()
-    elif customer_choice == "5":
-        delete_all_customers()
-    elif customer_choice == "6":
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("Returning to Main Menu.")
-        main_menu()
-    else:
-        print("Invalid selection. Please enter a number between 1 and 6.")
+# # ==== MAIN CUSTOMER MENU 
+# def customer_menu():
+#     """
+#     This is the function to display the Product Menu
+#     and to call relevant CUSTOMER functions
+#     """
+#     print("""\n    
+# + ==== Customer Menu ==== +
+# |                         |
+# | 1. Add a new Customer   |
+# | 2. View all Customers   |
+# | 3. Edit Customer        |
+# | 4. Delete a Customer    |
+# | 5. Delete all Customers |
+# | 6. Return to Main Menu  |
+# |                         |
+# + ----------------------- +\n
+# """)
+
+#     customer_choice = input(">> Please select option (1-6): ")
+
+#     if customer_choice == "1":
+#         add_customer()
+#     elif customer_choice == "2":
+#         view_customers()
+#     elif customer_choice == "3":
+#         edit_customer()
+#     elif customer_choice == "4":
+#         delete_customer()
+#     elif customer_choice == "5":
+#         delete_all_customers()
+#     elif customer_choice == "6":
+#         os.system('cls' if os.name == 'nt' else 'clear')
+#         print("Returning to Main Menu.")
+#         main_menu()
+#     else:
+#         print("Invalid selection. Please enter a number between 1 and 6.")
 
 
 # #========= Products Section =========

@@ -14,5 +14,13 @@
     "stock": 10,
     "category_id": 5,
     "category_name": "Beverages"
+  },
+  {
+    "product_id": 3,
+    "name": "Candles",
+    "price": 5.0,
+    "stock": 10,
+    "category_id": 7,
+    "category_name": "Homeware"
   }
 ]

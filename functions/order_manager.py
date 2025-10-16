@@ -9,7 +9,7 @@ from env import DEFAULT_ORDER_PATH, DEFAULT_PRODUCT_PATH, DEFAULT_CATEGORIES_PAT
 from functions.product_manager import delete_product, load_products, save_products, add_product, _convert_product_price_from_string, _convert_product_stock, _sorted_product, sort_products, _convert_product_price_from_string
 from functions.category_manager import list_categories, add_category
 from functions.product_categories import get_category_menu, assign_category_to_product_by_index
-
+from functions.customer_manager import list_customers_sorted, get_customer_by_id, get_customer_orders
 
 ORDERS_PATH: Path = DEFAULT_ORDER_PATH
 PRODUCT_PATH: Path = DEFAULT_PRODUCT_PATH
@@ -76,15 +76,14 @@ def _calc_lines_and_total(norm: List[Dict], product_by_id: Dict[int, Dict]) -> T
     line_items: List[Dict] = []
     for it in norm:
         p = product_by_id[it["product_id"]]
-        unit_cost = float(p.get("price", 0.0) or 0.0)
-        line_total = round(unit_cost * it["qty"], 2)
+        price = float(p.get("price", 0.0) or 0.0)
+        line_total = round(price * it["qty"], 2)
         grand_total = round(grand_total + line_total, 2)
         line_items.append({
             "product_id": it["product_id"],
-            "product_id": it["product_id"],  # alias
             "name": p.get("name", ""),
             "qty": it["qty"],
-            "unit_cost": unit_cost,
+            "price": price,
             "subtotal": line_total,       # labelled "Subtotal"
         })
     return line_items, grand_total
@@ -149,7 +148,7 @@ def add_order(
         "order_uuid": order_uuid,
         "customer_id": cid,
         "created_at": created_at,
-        "items": line_items,          # each has unit_cost and subtotal
+        "items": line_items,          # each has price and subtotal
         "order_total": grand_total,   # grand total
     }
     orders.append(order)
@@ -312,7 +311,7 @@ def get_orders_for_product(product_id: int, *, orders_path: Path = DEFAULT_ORDER
                         "order_id": o.get("order_id"),
                         "order_uuid": o.get("order_uuid"),
                         "qty": li.get("qty"),
-                        "unit_cost": li.get("unit_cost"),
+                        "price": li.get("price"),
                         "subtotal": li.get("subtotal"),
                         "created_at": o.get("created_at"),
                     })

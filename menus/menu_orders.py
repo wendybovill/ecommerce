@@ -7,6 +7,7 @@ from env import DEFAULT_PRODUCT_PATH, DEFAULT_CATEGORIES_PATH, DEFAULT_CUSTOMER_
 from functions.product_manager import delete_product, load_products, save_products, add_product, _convert_product_price_from_string, _convert_product_stock, _sorted_product, sort_products
 from functions.category_manager import list_categories, add_category
 from functions.product_categories import get_category_menu, assign_category_to_product_by_index
+from functions.customer_manager import list_customers_sorted, get_customer_by_id, get_customer_orders, add_customer, save_customers, load_customers
 from functions.order_manager import add_order, edit_order, delete_order, list_orders, DEFAULT_ORDER_PATH
 from menus.menu_product_sort import sort_products_menu
 
@@ -83,7 +84,7 @@ def _preview_basket(items: List[Dict]) -> None:
         print("\nBasket: (empty)")
         return
     print("\nBasket:")
-    products = {int(product["product_id"]): product for product in load_products(PRODUCTS_PATH)}
+    products = {int(product["product_id"]): product for product in load_products(PRODUCT_PATH)}
     total = 0.0
     for it in items:
         pid, qty = it["product_id"], it["qty"]
@@ -111,7 +112,7 @@ def create_order_menu() -> None:
 
     _preview_basket(items)
     confirm = input(">> Place order? Type YES to confirm: ").strip()
-    if confirm != "YES":
+    if confirm != "YES" :
         print("Cancelled.")
         return
 
@@ -211,12 +212,11 @@ def orders_menu() -> None:
 | 2. Edit Orders          |
 | 3. Delete Orders        |
 | 4. View Orders          |
-| 5. Sort Orders          |
-| 6. Main Menu.           |
+| 5. Main Menu            |
 |                         |
 + ----------------------- +\n
 """)
-        orders_choice = input("Select 1-6: \n").strip()
+        orders_choice = input("Select 1-5: \n").strip()
         if orders_choice == "1":
             create_order_menu()
         elif orders_choice == "2":
@@ -225,6 +225,8 @@ def orders_menu() -> None:
             delete_order_menu()
         elif orders_choice == "4":
             view_orders_menu()
+        elif orders_choice == "4":
+            sort_orders()
         elif orders_choice == "5":
             break
         else:
