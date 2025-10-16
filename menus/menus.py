@@ -1,15 +1,15 @@
 import os
 import json
 from pathlib import Path
-from functions.product_manager import add_product
-from env import DATA_DIR, DEFAULT_ORDER_PATH, DEFAULT_PRODUCT_PATH, DEFAULT_CATEGORIES_PATH
+from env import DATA_DIR, DEFAULT_CUSTOMER_PATH, DEFAULT_ORDER_PATH, DEFAULT_PRODUCT_PATH, DEFAULT_CATEGORIES_PATH, DEFAULT_REPORTS_PATH
 from menus.menu_category import category_menu
 from menus.menu_product import product_menu
+from menus.menu_orders import orders_menu
 
 PRODUCTS_PATH: Path = DEFAULT_PRODUCT_PATH        # data_files/product_catalog.json
 CATEGORIES_PATH: Path = DEFAULT_CATEGORIES_PATH    # data_files/category_catalog.json
 ORDERS_PATH: Path = DEFAULT_ORDER_PATH              # data_files/orders.json
-
+CUSTOMERS_PATH: Path = DATA_DIR / "customers.json"  # data_files/customers.json
 
 #========= Main Menu Section =========
 # Defining the Main Menu and adding Menu Functions
@@ -75,12 +75,12 @@ def add_customer():
     delivery_choice = input("Select:\n1 For Yes\n2 To Enter Delivery Address")
 
     if delivery_choice == "1":
-        with open(customers_file, "a") as file:
+        with open(CUSTOMERS_PATH, "a") as file:
             # file.write(customer + "\n")
             json.dumps(customer + "\n")
-        with open(records_file, "a") as file:
-            # file.write(customer + "\n")
-            json.dumps(customer + "\n")
+        with open(DEFAULT_REPORTS_PATH, "w") as file:
+            file.write("customer")
+            # json.dumps(customer + "\n")
         print("Customer added successfully!")
         print("Returning to Customer Menu.")
         customer_menu()
@@ -96,7 +96,7 @@ def add_customer():
                 "country" : input("Enter Country"),
                 }
         add_customer_delivery_address()
-        with open(customers_file, "a") as file:
+        with open(DEFAULT_CUSTOMER_PATH, "a+") as file:
             json.dumps(customer + "\n")
         with open(records_file, "a") as file:
             # file.write(customer + "\n")
@@ -114,7 +114,7 @@ def view_customers():
     This is the function to view all customers
     """
     try:
-        with open(customers_file, "r") as file:
+        with open(DEFAULT_CUSTOMER_PATH, "r") as file:
             customers = file.read()
             if customers:
                 print("\n--- Viewing Customers ---")
