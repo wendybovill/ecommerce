@@ -7,8 +7,9 @@ from functions.product_categories import get_category_menu, assign_category_to_p
 from env import DEFAULT_PRODUCT_PATH, DEFAULT_CATEGORIES_PATH
 from menus.menu_product_sort import sort_products_menu
 
-PRODUCTS_PATH: Path = DEFAULT_PRODUCT_PATH        # data_files/product_catelog.json
-CATEGORIES_PATH: Path = DEFAULT_CATEGORIES_PATH  # data_files/category_catelog.json
+PRODUCTS_PATH: Path = DEFAULT_PRODUCT_PATH
+CATEGORIES_PATH: Path = DEFAULT_CATEGORIES_PATH
+
 
 class Product:
     """
@@ -37,7 +38,7 @@ def product_menu():
 |                                  |
 | 1) View All Products             |
 | 2) Add Product with Category     |
-| 3) Change a Product'product Category   |
+| 3) Change a Product's Category   |
 | 4) Delete Product                |
 | 5) Sort Products                 |
 | 6) Main Menu                     |
