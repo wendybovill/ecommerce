@@ -1,0 +1,4 @@
+Products = [{"Name": "Laptop", "Category": "Electronics", "Price": 999.99, "Stock": 10, "Orders": 5},
+            {"Name": "Smartphone", "Category": "Electronics", "Price": 699.99, "Stock": 15, "Orders": 8},
+            {"Name": "Headphones", "Category": "Accessories", "Price": 199.99, "Stock": 25, "Orders": 12}
+            ]

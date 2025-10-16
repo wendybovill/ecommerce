@@ -1,0 +1,12 @@
+products = [
+    {'ID': 1, 'Name': 'Dog Food', 'Category': 'Pets', 'Price': 5.1, 'Stock': 10, 'Orders': ''},
+    {'ID': 2, 'Name': 'Cat Food', 'Category': 'Pets', 'Price': 4.5, 'Stock': 15, 'Orders': ''},
+    {'ID': 3, 'Name': 'Bird Seed', 'Category': 'Pets', 'Price': 3.2, 'Stock': 20, 'Orders': ''},
+    {'ID': 4, 'Name': 'Fish Flakes', 'Category': 'Pets', 'Price': 2.8, 'Stock': 25, 'Orders': ''},
+    {'ID': 5, 'Name': 'Hamster Wheel', 'Category': 'Pets', 'Price': 12.0, 'Stock': 5, 'Orders': ''},
+    {'ID': 6, 'Name': 'Leash', 'Category': 'Pets', 'Price': 7.5, 'Stock': 30, 'Orders': ''},
+    {'ID': 7, 'Name': 'Collar', 'Category': 'Pets', 'Price': 6.0, 'Stock': 35, 'Orders': ''},
+    {'ID': 8, 'Name': 'Pet Bed', 'Category': 'Pets', 'Price': 20.0, 'Stock': 8, 'Orders': ''},
+    {'ID': 9, 'Name': 'Scratching Post', 'Category': 'Pets', 'Price': 15.0, 'Stock': 12, 'Orders': ''},
+    {'ID': 10, 'Name': 'Aquarium', 'Category': 'Pets', 'Price': 50.0, 'Stock': 3, 'Orders': ''},
+]
